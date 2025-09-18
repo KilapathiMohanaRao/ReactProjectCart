@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./About.css";
+import "./about.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   FaLeaf,
