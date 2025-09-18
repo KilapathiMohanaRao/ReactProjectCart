@@ -122,7 +122,7 @@ function App() {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/veg" className="nav-link d-flex align-items-center gap-2">
+                <NavLink to="/Veg" className="nav-link d-flex align-items-center gap-2">
                   <Leaf className="nav-icon veg-icon" size={20} /> Veg
                 </NavLink>
               </li>
@@ -160,7 +160,7 @@ function App() {
       <div className="page-content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/veg" element={<Veg />} />
+          <Route path="/Veg" element={<Veg />} />
           <Route path="/nonveg" element={<Nonveg />} />
           <Route path="/fruits" element={<Fruits />} />
           <Route path="/juices" element={<Juices />} />
