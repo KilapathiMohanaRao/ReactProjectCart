@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "./store";
-import { ToastContainer, toast } from "react-toastify";
+import { addItem } from "./store"; // ✅ Ensure this import exists
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./veg.css";
 
@@ -59,27 +59,23 @@ function Veg() {
       {/* Filter Section */}
       <div className="mb-4 text-center">
         <h5 className="mb-3">Filter by Price</h5>
-        <div className="d-flex flex-wrap justify-content-center gap-3">
+        <div className="filter-container">
           {priceRanges.map(({ label }) => (
-            <div key={label} className="form-check form-check-inline">
+            <label key={label} className="form-check-inline">
               <input
-                className="form-check-input"
                 type="checkbox"
-                id={label}
                 checked={selectedFilter === label}
                 onChange={() => handleFilterChange(label)}
               />
-              <label className="form-check-label" htmlFor={label}>
-                {label}
-              </label>
-            </div>
+              {label}
+            </label>
           ))}
           {selectedFilter && (
             <button
-              className="btn btn-outline-danger btn-sm ms-3"
+              className="btn btn-outline-danger btn-sm clear-btn"
               onClick={() => setSelectedFilter("")}
             >
-              Clear Filter
+              Clear
             </button>
           )}
         </div>
@@ -92,24 +88,24 @@ function Veg() {
             const qty = quantities[item.id] || 0;
             return (
               <div className="veg-card shadow-sm" key={item.id}>
-                <img src={item.image} alt={item.name} className="card-img-top" />
-                <div className="card-body d-flex flex-column">
+                <img src={item.image} alt={item.name} />
+                <div className="card-body">
                   <h5 className="veg-title">{item.name}</h5>
                   <p className="veg-desc">{item.description}</p>
                   <p className="veg-price">₹{item.price}</p>
 
                   {qty === 0 ? (
                     <button
-                      className="btn btn-success mt-auto w-100"
+                      className="btn btn-success add-btn"
                       onClick={() => {
                         updateQuantity(item, 1);
-                        showToast("success", `Product ${item.name} added to cart!`);
+                        showToast("success", `Added ${item.name} to cart!`);
                       }}
                     >
                       🛒 Add To Cart
                     </button>
                   ) : (
-                    <div className="d-flex justify-content-between align-items-center mt-auto">
+                    <div className="qty-control">
                       <button
                         className="btn btn-outline-danger"
                         onClick={() => {
@@ -142,29 +138,25 @@ function Veg() {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="pagination-container d-flex justify-content-center gap-2 my-3">
+        <div className="pagination-container">
           <button
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="nav-btn"
           >
             Previous
           </button>
-
           {Array.from({ length: totalPages }, (_, i) => (
             <button
               key={i}
               onClick={() => setCurrentPage(i + 1)}
-              className={`page-btn ${currentPage === i + 1 ? "active" : ""}`}
+              className={currentPage === i + 1 ? "active" : ""}
             >
               {i + 1}
             </button>
           ))}
-
           <button
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="nav-btn"
           >
             Next
           </button>

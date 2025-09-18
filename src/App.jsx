@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import "./App.css";
 import Home from "./Home";
-import Veg from "./veg";
+
 import Nonveg from "./Nonveg";
 import Fruits from "./Fruites";
 import Juices from "./Juices";
@@ -11,6 +11,8 @@ import Login from "./Login";
 import Order from "./Order";
 import About from "./About";
 import Notfound from "./Notfound";
+import Veg from "./Veg";
+
 
 import { useSelector } from "react-redux";
 

@@ -1,10 +1,11 @@
 /* ================= Grid ================= */
 .veg-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
   margin: 0 auto;
   max-width: 1100px;
+  padding: 0 10px;
 }
 
 /* ================= Card Styling ================= */
@@ -14,71 +15,118 @@
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  min-height: 360px;
+  min-height: 340px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .veg-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .veg-card img {
   width: 100%;
-  height: 180px;
+  height: 160px;
   object-fit: cover;
 }
 
+.card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
 .veg-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 .veg-desc {
   flex-grow: 1;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #555;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 .veg-price {
   font-weight: 600;
-  font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 
-/* ================= Buttons ================= */
-.btn {
-  border-radius: 6px;
-  font-size: 0.9rem;
-  padding: 6px 10px;
+.add-btn {
+  margin-top: auto;
+  width: 100%;
+}
+
+/* ================= Quantity Control ================= */
+.qty-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+/* ================= Filter ================= */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.clear-btn {
+  margin-left: 8px;
 }
 
 /* ================= Pagination ================= */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin: 15px 0;
+}
+
 .pagination-container button {
   border: 1px solid #ccc;
-  padding: 4px 12px;
+  padding: 5px 10px;
   border-radius: 6px;
   cursor: pointer;
   background: #fff;
 }
 
-.page-btn.active {
+.pagination-container button.active {
   background: #28a745;
   color: #fff;
   font-weight: 600;
 }
 
-.nav-btn:disabled {
+.pagination-container button:disabled {
   background: #eee;
   cursor: not-allowed;
 }
 
 /* ================= Responsive ================= */
 @media (max-width: 576px) {
+  .veg-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+
   .veg-card {
-    min-height: 320px;
+    min-height: 300px;
+  }
+
+  .veg-card img {
+    height: 140px;
+  }
+
+  .veg-title {
+    font-size: 0.95rem;
+  }
+
+  .veg-desc {
+    font-size: 0.8rem;
   }
 }

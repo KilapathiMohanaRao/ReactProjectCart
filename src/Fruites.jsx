@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "./store";
 import { ToastContainer, toast } from "react-toastify";
@@ -14,49 +14,66 @@ function Fruits() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
-  const priceRanges = [
-    { label: "Below ₹50", min: 0, max: 50 },
-    { label: "₹50 - ₹100", min: 50, max: 100 },
-    { label: "₹100 - ₹200", min: 100, max: 200 },
-    { label: "Above ₹200", min: 200, max: Infinity },
-  ];
-
-  const handleFilterChange = (label) => {
-    setSelectedFilter((prev) => (prev === label ? "" : label));
-    setCurrentPage(1);
-  };
-
-  const filteredItems =
-    selectedFilter !== ""
-      ? fruitItems.filter((item) => {
-          const range = priceRanges.find((r) => r.label === selectedFilter);
-          return item.price >= range.min && item.price <= range.max;
-        })
-      : fruitItems;
-
-  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = filteredItems.slice(
-    startIndex,
-    startIndex + itemsPerPage
+  const priceRanges = useMemo(
+    () => [
+      { label: "Below ₹50", min: 0, max: 50 },
+      { label: "₹50 - ₹100", min: 50, max: 100 },
+      { label: "₹100 - ₹200", min: 100, max: 200 },
+      { label: "Above ₹200", min: 200, max: Infinity },
+    ],
+    []
   );
 
-  const handleAdd = (item) => {
-    const newQty = (quantities[item.id] || 0) + 1;
-    setQuantities({ ...quantities, [item.id]: newQty });
-    dispatch(addItem(item));
-  };
+  // Get selected range only once
+  const selectedRange = useMemo(
+    () => priceRanges.find((r) => r.label === selectedFilter) || null,
+    [selectedFilter, priceRanges]
+  );
 
-  const handleRemove = (item) => {
-    const newQty = (quantities[item.id] || 0) - 1;
-    if (newQty <= 0) {
-      const updated = { ...quantities };
-      delete updated[item.id];
-      setQuantities(updated);
-    } else {
-      setQuantities({ ...quantities, [item.id]: newQty });
-    }
-  };
+  // Filtered items
+  const filteredItems = useMemo(() => {
+    if (!selectedRange) return fruitItems;
+    return fruitItems.filter(
+      (item) => item.price >= selectedRange.min && item.price <= selectedRange.max
+    );
+  }, [fruitItems, selectedRange]);
+
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+  const currentItems = filteredItems.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Handle filter change
+  const handleFilterChange = useCallback((label) => {
+    setSelectedFilter((prev) => (prev === label ? "" : label));
+    setCurrentPage(1);
+  }, []);
+
+  // Add Item
+  const handleAdd = useCallback(
+    (item) => {
+      setQuantities((prev) => ({
+        ...prev,
+        [item.id]: (prev[item.id] || 0) + 1,
+      }));
+      dispatch(addItem(item));
+      toast.success(`✅ ${item.name} added to cart!`);
+    },
+    [dispatch]
+  );
+
+  // Remove Item
+  const handleRemove = useCallback((item) => {
+    setQuantities((prev) => {
+      const newQty = (prev[item.id] || 0) - 1;
+      const updated = { ...prev };
+      if (newQty <= 0) delete updated[item.id];
+      else updated[item.id] = newQty;
+      return updated;
+    });
+    toast.error(`❌ ${item.name} quantity decreased`);
+  }, []);
 
   return (
     <>
@@ -98,11 +115,7 @@ function Fruits() {
             const qty = quantities[item.id] || 0;
             return (
               <div className="fruit-card shadow-sm" key={item.id}>
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="card-img-top"
-                />
+                <img src={item.image} alt={item.name} className="card-img-top" />
                 <div className="card-body d-flex flex-column">
                   <h5 className="card-title">{item.name}</h5>
                   <p className="card-text text-muted">{item.description}</p>
@@ -112,12 +125,7 @@ function Fruits() {
                     <button
                       type="button"
                       className="btn btn-success mt-auto w-100"
-                      onClick={() => {
-                        handleAdd(item);
-                        toast.success(
-                          `Product ${item.name} added to cart successfully!`
-                        );
-                      }}
+                      onClick={() => handleAdd(item)}
                     >
                       🛒 Add To Cart
                     </button>
@@ -125,24 +133,14 @@ function Fruits() {
                     <div className="d-flex justify-content-between align-items-center mt-auto">
                       <button
                         className="btn btn-outline-danger"
-                        onClick={() => {
-                          handleRemove(item);
-                          toast.error(
-                            `Product ${item.name} decreasing quantity`
-                          );
-                        }}
+                        onClick={() => handleRemove(item)}
                       >
                         −
                       </button>
                       <span className="fw-bold">{qty}</span>
                       <button
                         className="btn btn-outline-success"
-                        onClick={() => {
-                          handleAdd(item);
-                          toast.info(
-                            `Product ${item.name} increasing quantity`
-                          );
-                        }}
+                        onClick={() => handleAdd(item)}
                       >
                         +
                       </button>
@@ -164,7 +162,7 @@ function Fruits() {
         <div className="pagination-container d-flex justify-content-center gap-2 my-3">
           <button
             className="nav-btn"
-            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
           >
             Previous
@@ -182,9 +180,7 @@ function Fruits() {
 
           <button
             className="nav-btn"
-            onClick={() =>
-              setCurrentPage(Math.min(totalPages, currentPage + 1))
-            }
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
           >
             Next
