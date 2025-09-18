@@ -1,0 +1,356 @@
+/* ===== Container ===== */
+.auth-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+/* ===== Auth Card ===== */
+.auth-card {
+  background: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 70px 60px;
+  border-radius: 24px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 1100px;
+  min-height: 520px;
+  animation: fadeIn 0.6s ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+.auth-card:hover {
+  transform: translateY(-6px) scale(1.01);
+}
+
+/* ===== Left Section ===== */
+.auth-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #f1f1f1;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+  background: #6c63ff;
+  color: white;
+}
+
+.form-slider {
+  position: relative;
+  overflow: hidden;
+  height: auto;
+}
+
+.form-slide {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.4s ease;
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.form-slide.show {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+/* ===== Input Group with Icons ===== */
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1.8px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.input-group .icon {
+  margin-right: 10px;
+  font-size: 18px;
+  color: #555;
+}
+
+.input-group input {
+  border: none;
+  outline: none;
+  flex: 1;
+  background: transparent;
+  font-size: 16px;
+}
+
+.input-group:focus-within {
+  border-color: #6c63ff;
+  box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.15);
+}
+
+/* ===== Buttons ===== */
+.btn {
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+.signup-btn {
+  background: linear-gradient(135deg, #6c63ff, #4e54c8);
+  color: white;
+}
+
+.logout-btn {
+  background: #ff4d4f;
+  color: white;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Right Section ===== */
+.auth-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #3b3a3b, #e0dfdf);
+  border-radius: 20px;
+  padding: 30px;
+  color: white;
+  text-align: center;
+}
+
+.auth-right img {
+  max-width: 100%;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* ===== Responsive Fix ===== */
+@media (max-width: 768px) {
+  .auth-card {
+    grid-template-columns: 1fr;
+    padding: 25px 20px;
+    max-width: 100%;
+    min-height: auto;   /* ✅ let height adjust automatically */
+  }
+
+  .auth-left {
+    width: 100%;
+  }
+
+  .auth-right {
+    display: none; /* ✅ hide illustration on small screens */
+  }
+
+  .form {
+    gap: 14px; /* ✅ reduce spacing for smaller screens */
+  }
+
+  .input-group {
+    padding: 10px 12px; /* ✅ compact input fields */
+  }
+
+  .btn {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-title {
+    font-size: 1.2rem;
+  }
+
+  .tab-btn {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .auth-card {
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  }
+}
+.auth-right img {
+  width: 550px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.auth-right img.hacking {
+  animation: glitch 0.2s infinite;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  20% {
+    transform: translate(-5px, 5px) rotate(-2deg);
+    filter: hue-rotate(90deg);
+  }
+  40% {
+    transform: translate(5px, -5px) rotate(2deg);
+    filter: hue-rotate(180deg);
+  }
+  60% {
+    transform: translate(-5px, 5px) rotate(-2deg);
+    filter: hue-rotate(270deg);
+  }
+  80% {
+    transform: translate(5px, -5px) rotate(2deg);
+    filter: hue-rotate(360deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+}
+/* ===== Image Glitch ===== */
+/* ===== Image Glitch ===== */
+
+/* ===== Image Glitch ===== */
+.hacking {
+  animation: glitch 0.2s infinite;
+}
+@keyframes glitch {
+  0% { transform: translate(0,0) rotate(0deg); filter: hue-rotate(0deg);}
+  25% { transform: translate(-5px,5px) rotate(-2deg); filter: hue-rotate(90deg);}
+  50% { transform: translate(5px,-5px) rotate(2deg); filter: hue-rotate(180deg);}
+  75% { transform: translate(-5px,5px) rotate(-2deg); filter: hue-rotate(270deg);}
+  100% { transform: translate(0,0) rotate(0deg); filter: hue-rotate(360deg);}
+}
+
+/* ===== Full-page Burning Overlay ===== */
+.burn-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255,80,0,0.2) 0%, rgba(0,0,0,0.8) 70%);
+  animation: burn 5s forwards;
+  z-index: 999;
+  mix-blend-mode: screen;
+}
+@keyframes burn {
+  0% { opacity: 0; filter: blur(0px) contrast(100%);}
+  25% { opacity: 0.4; filter: blur(2px) contrast(150%) brightness(120%);}
+  50% { opacity: 0.7; filter: blur(4px) contrast(200%) brightness(150%);}
+  75% { opacity: 0.9; filter: blur(6px) contrast(250%) brightness(200%);}
+  100% { opacity: 1; filter: blur(10px) contrast(300%) brightness(250%);}
+}
+
+/* ===== Page Shake ===== */
+.burning .auth-card {
+  animation: shake 5s forwards;
+}
+@keyframes shake {
+  0%,100% { transform: translate(0,0);}
+  10% { transform: translate(-10px,5px) rotate(-1deg);}
+  20% { transform: translate(10px,-5px) rotate(1deg);}
+  30% { transform: translate(-10px,5px) rotate(-2deg);}
+  40% { transform: translate(10px,-5px) rotate(2deg);}
+  50% { transform: translate(-5px,5px) rotate(-1deg);}
+  60% { transform: translate(5px,-5px) rotate(1deg);}
+  70% { transform: translate(-5px,5px) rotate(-2deg);}
+  80% { transform: translate(5px,-5px) rotate(2deg);}
+  90% { transform: translate(0,0) rotate(0);}
+}
+
+/* ===== Matrix Background ===== */
+.matrix {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  display: flex;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.matrix-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-family: monospace;
+  color: #0f0;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 14px;
+  animation: matrixDrop linear infinite;
+}
+
+.matrix-column span {
+  display: block;
+  opacity: 0;
+}
+
+@keyframes matrixDrop {
+  0% { transform: translateY(-100%); opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+.dd{
+  color: red;
+  font-size: large;
+  text-align: center;
+
+}
+.nn{
+  font-size: 30px;
+  font-weight: 100;
+  font-style: bold;
+  color: red;
+}

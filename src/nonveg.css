@@ -1,0 +1,67 @@
+/* ✅ Strict 4-column grid */
+.nonveg-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Always 4 columns on large screens */
+  gap: 1.5rem;
+}
+
+/* ✅ Responsive Fix for Tablets & Mobiles */
+@media (max-width: 992px) {
+  .nonveg-grid-4 {
+    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablet */
+  }
+}
+
+@media (max-width: 576px) {
+  .nonveg-grid-4 {
+    grid-template-columns: 1fr; /* 1 per row on mobile */
+  }
+}
+
+/* ✅ Card Styling */
+.nonveg-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  min-height: 360px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+  cursor: pointer;
+}
+
+/* 🎨 Hover Effect */
+.nonveg-card:hover {
+  transform: translateY(-6px); /* Slight lift */
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+}
+
+.nonveg-img {
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.nonveg-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 12px;
+}
+
+.nonveg-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.nonveg-desc {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.nonveg-price {
+  margin: 0.5rem 0;
+}

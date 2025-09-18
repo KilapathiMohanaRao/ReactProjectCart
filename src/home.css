@@ -1,0 +1,306 @@
+/* ================= General ================= */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#root, .App {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* ================= Top Header ================= */
+.top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1050;
+  background: linear-gradient(135deg, #129b34, #107ce0);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  padding: 6px 0;
+}
+
+.top-header .brand-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.top-header .tagline {
+  font-size: 0.75rem;
+  color: #f1f1f1;
+  margin-bottom: 0;
+}
+
+/* ================= Search Box ================= */
+.search-box {
+  border-radius: 30px;
+  padding: 0.35rem 1rem;
+  font-size: 0.9rem;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.search-box:focus {
+  box-shadow: 0 0 8px rgba(40, 167, 69, 0.6);
+}
+
+/* ================= Cart + Login Buttons ================= */
+.btn-cart,
+.btn-login {
+  border-radius: 30px;
+  padding: 0.45rem 1.1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.3s ease;
+}
+
+.btn-cart:hover,
+.btn-login:hover {
+  background: #42da05;
+  color: #fff;
+  border-color: #28a745;
+}
+
+.btn-cart .badge {
+  font-size: 0.75rem;
+  padding: 0.35em 0.55em;
+}
+
+/* ================= Hero Carousel ================= */
+.hero-carousel {
+  width: 98vw;
+  overflow: hidden;
+  border-radius: 50px;
+  position: relative;
+}
+
+.hero-carousel .carousel-inner {
+  width: 100%;
+  border-radius: 50px;
+}
+
+.hero-carousel .carousel-item img {
+  width: 100vw;
+  height: 70vh;
+  object-fit: cover;
+  border-radius: 50px;
+}
+
+.hero-carousel .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+  border-radius: 50px;
+}
+
+.hero-carousel .carousel-caption {
+  z-index: 2;
+}
+
+.hero-carousel .btn {
+  border-radius: 50px;
+  padding: 8px 20px; /* ✅ normal size */
+  font-size: 1rem;
+  font-weight: 600;
+  background: #28a745;
+  color: #fff;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-carousel .btn:hover {
+  background: #218838;
+  box-shadow: 0 0 10px rgba(33, 136, 56, 0.6);
+}
+
+.hero-carousel .carousel-control-prev,
+.hero-carousel .carousel-control-next {
+  width: 5%;
+}
+
+/* ================= Store Category Cards ================= */
+.card.h-100 {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 20px;
+}
+
+.card.h-100:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-body a {
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.card-body a:hover {
+  background: #28a745 !important;
+  transform: none;
+}
+
+/* ================= Reviews Section ================= */
+.reviews-section {
+  background: #f9f9f9;
+}
+
+.review-card {
+  background: #e9d3d3;
+  max-width: 650px; /* ✅ increased width */
+  width: 90%;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.review-text {
+  font-size: 1rem;
+  font-style: italic;
+  color: #555;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.review-rating {
+  color: #fbbc04;
+  font-size: 1.2rem;
+}
+
+/* ================= Footer ================= */
+.footer {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: #fff;
+  padding: 60px 20px 30px;
+  font-family: 'Arial', sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 220px;
+}
+
+.footer-column h2, .footer-column h3 {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.footer-column p, .footer-column a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.footer-column a:hover {
+  color: #000;
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+.footer-social {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.footer-social a {
+  color: #fff;
+  font-size: 20px;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.footer-social a:hover {
+  color: #000;
+  transform: scale(1.2);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.3);
+  margin-top: 30px;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ================= Page Content ================= */
+.page-content {
+  padding-top: 135px;
+}
+
+/* ================= Cards ================= */
+.card img {
+  width: 100%;
+  max-width: 300px;
+  height: 500px;
+  object-fit: contain;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 768px) {
+  .top-header {
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+
+  .top-header .brand-title { font-size: 1.2rem; }
+  .top-header .tagline { font-size: 0.7rem; }
+  .top-header img { max-height: 30px; }
+
+  .search-box { max-width: 150px !important; font-size: 0.85rem; padding: 0.25rem 0.5rem; }
+  .btn-cart, .btn-login { font-size: 0.85rem; padding: 0.25rem 0.6rem; }
+
+  .footer-container { flex-direction: column; align-items: center; text-align: center; }
+  .footer-column { margin-bottom: 20px; }
+  .footer-social { justify-content: center; }
+
+  .review-card {
+    max-width: 95%;
+  }
+}

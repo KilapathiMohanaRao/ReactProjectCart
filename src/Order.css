@@ -1,0 +1,136 @@
+/* ===== MAIN HEADER ===== */
+.orders-main-header {
+  font-size: 2.3rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #ff6b6b;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+}
+
+/* ===== CONTAINER ===== */
+.order-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 20px;
+  align-items: center; /* 🔑 center cards */
+}
+
+/* ===== ORDER CARD ===== */
+.order-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  max-width: 700px; /* 🔑 fixed max width */
+}
+
+/* ===== ORDER HEADER ===== */
+.order-header-block {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.order-number {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 5px;
+}
+.order-time {
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+/* ===== ITEMS WRAPPER (row layout) ===== */
+.order-items-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center; /* 🔑 items centered */
+  margin-bottom: 3.5rem;    /* space for total */
+}
+
+/* ===== ITEM BLOCK ===== */
+.order-item-block {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f9fafb;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 15px;
+  transition: background 0.2s ease;
+}
+.order-item-block:hover {
+  background: #f1f5f9;
+}
+
+/* Item Image */
+.order-item-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+}
+
+/* Item Text */
+.order-item-name {
+  font-weight: 600;
+  color: #0f172a;
+}
+.order-item-qty {
+  color: #475569;
+  font-size: 0.9rem;
+}
+.order-item-price {
+  font-weight: 700;
+  color: #ef4444;
+  font-size: 1rem;
+}
+
+/* ===== TOTAL (center bottom) ===== */
+.order-total {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%); /* 🔑 center horizontally */
+  display: flex;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+.order-total-price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ef4444;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-cart {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 1.2rem;
+  padding: 2rem 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .order-item-block {
+    flex: 0 0 100%;
+  }
+  .order-total {
+    position: static;
+    margin-top: 1rem;
+    transform: none;
+    justify-content: center;
+  }
+}
