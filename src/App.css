@@ -1,25 +1,78 @@
 /* ================= Top Header ================= */
+/* ================= Top Header ================= */
 .top-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1050;
+  z-index: 1100; /* higher than navbar */
   background: linear-gradient(135deg, #129b34, #107ce0);
   border-bottom: 2px solid rgba(255, 255, 255, 0.15);
-  padding: 6px 0; /* 🔽 Reduced height */
+  padding: 6px 0;
 }
 
-.top-header .brand-title {
-  font-size: 1.3rem; /* smaller title */
-  font-weight: 700;
-  margin-bottom: 0;
+/* ================= Navbar ================= */
+.navbar {
+  position: fixed;
+  top: var(--header-height, 70px); /* always below header */
+  left: 0;
+  width: 100%;
+  z-index: 1099; /* just below header */
+  transition: all 0.3s ease;
 }
 
-.top-header .tagline {
-  font-size: 0.75rem;
-  color: #f1f1f1;
-  margin-bottom: 0;
+/* Ensure toggler is above everything */
+.navbar-toggler {
+  z-index: 1110; /* above both header and navbar */
+}
+
+/* ================= Page Content ================= */
+.page-content {
+  padding-top: calc(var(--header-height, 70px) + var(--navbar-height, 56px));
+  transition: padding-top 0.3s ease;
+}
+
+/* ================= Mobile Responsive ================= */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    position: absolute;
+    top: 100%; /* below navbar */
+    left: 0;
+    width: 100%;
+    background: #343a40;
+    z-index: 1080; /* below toggler */
+  }
+
+  .page-content {
+    padding-top: calc(var(--header-height, 70px) + 56px);
+  }
+}
+
+.navbar .nav-link {
+  color: #f8f9fa !important;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.8rem 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #3107c9 !important;
+  transform: translateY(-2px);
+}
+
+.navbar .nav-link.active {
+  color: #591de4 !important;
+  border-bottom: 2px solid #5528a7;
+}
+
+/* ================= Page Content ================= */
+.page-content {
+  padding-top: calc(var(--header-height, 70px) + var(--navbar-height, 56px));
+  transition: padding-top 0.3s ease;
 }
 
 /* ================= Search Box ================= */
@@ -47,13 +100,13 @@
   color: #333;
   display: flex;
   align-items: center;
-  gap: 6px; /* space between icon and text */
+  gap: 6px;
   transition: 0.3s ease;
 }
 
 .btn-cart:hover,
 .btn-login:hover {
-  background: #42da05 !important;
+  background: #42da05;
   color: #fff;
   border-color: #28a745;
 }
@@ -63,180 +116,10 @@
   padding: 0.35em 0.55em;
 }
 
-/* ================= Navbar ================= */
-.navbar {
-  position: fixed !important;
-  top: var(--header-height, 70px); /* dynamically set by JS */
-  left: 0;
-  width: 100%;
-  z-index: 1040;
+/* ================= Icons ================= */
+.nav-icon {
+  transition: transform 0.2s ease, color 0.3s ease;
 }
-
-.page-content {
-  padding-top: calc(var(--header-height, 70px) + 60px); /* space for header + navbar */
-}
-
-.navbar .nav-link {
-  color: #f8f9fa !important;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 0.8rem 1.3rem;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-/* Make icons larger */
-.navbar .nav-link::before {
-  font-size: 1.2rem;
-}
-
-.navbar .nav-link:hover {
-  color: #3107c9 !important;
-  transform: translateY(-2px);
-}
-
-.navbar .nav-link.active {
-  color: #591de4 !important;
-  border-bottom: 2px solid #5528a7;
-}
-
-/* ================= Page Content ================= */
-.page-content {
-  padding-top: 135px; /* Adjusted for new header + navbar height */
-}
-/* ✅ Make sure the whole app content is centered */
-body, html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100vh;
-  background: #f8f9fa; /* optional light background */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* ✅ Ensure the main app fills the width */
-#root, .App {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;   /* Center horizontally */
-  justify-content: flex-start; /* Top aligned */
-  text-align: center;    /* Optional: center text */
-}
-
-/* ✅ Fix Bootstrap container overrides (if needed) */
-.container {
-  max-width: 1200px; /* keep wide enough */
-  margin: 0 auto;    /* center the container */
-  padding: 0 15px;
-}
-.card img {
-  width: 100%; /* Make the image take full card width */
-  max-width: 300px; /* Increased maximum width */
-  height: 500px; /* Increased fixed height for uniformity */
-  object-fit: contain; /* Ensures the full image fits without cutting */
-  border-radius: 20px; /* Rounded corners */
-  display: block; /* Remove inline spacing issues */
-  margin: 0 auto; /* Center the image in the card */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
-}
-
-/* ✅ Custom Navbar Toggler (No Broken SVG) */
-.navbar-dark .navbar-toggler-icon {
-  background: none !important;
-  width: 1.5rem;
-  height: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.navbar-dark .navbar-toggler-icon::before,
-.navbar-dark .navbar-toggler-icon::after,
-.navbar-dark .navbar-toggler-icon span {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: white;
-  margin: 3px 0;
-  border-radius: 2px;
-}
-
-/* ✅ Mobile Responsive Header */
-@media (max-width: 768px) {
-  .top-header {
-    padding: 0.5rem 1rem; /* reduce top header height */
-    text-align: center;
-  }
-
-  .top-header .brand-title {
-    font-size: 1.2rem;
-  }
-
-  .top-header .tagline {
-    font-size: 0.7rem;
-  }
-
-  .top-header img {
-    max-height: 30px;
-  }
-
-  .search-box {
-    max-width: 150px !important;
-    font-size: 0.85rem;
-    padding: 0.25rem 0.5rem;
-  }
-
-  .btn-cart,
-  .btn-login :hover {
-    font-size: 0.85rem;
-    padding: 0.25rem 0.6rem;
-    color: #129b34;
-
-
-  }
-}
-/* ✅ Custom Hamburger Icon for Dark Navbar */
-.navbar-dark .navbar-toggler-icon {
-  background: none !important;
-  width: 1.5rem;
-  height: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.navbar-dark .navbar-toggler-icon::before,
-.navbar-dark .navbar-toggler-icon::after,
-.navbar-dark .navbar-toggler-icon span {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: white;
-  margin: 3px 0;
-  border-radius: 2px;
-}
-/* 🌟 Modern Navbar Styling */
-.navbar-nav .nav-link {
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.navbar-nav .nav-link:hover {
-  color: #ffc107 !important;
-  transform: translateY(-2px);
-}
-
-/* 🎨 Icon Colors */
-.nav-icon { transition: transform 0.2s ease, color 0.3s ease; }
 .home-icon { color: #0dcaf0; }
 .veg-icon { color: #28a745; }
 .nonveg-icon { color: #dc3545; }
@@ -245,16 +128,34 @@ body, html {
 .order-icon { color: #0d6efd; }
 .about-icon { color: #20c997; }
 
-.navbar-nav .nav-link:hover .nav-icon {
-  transform: scale(1.2);
+.navbar-nav .nav-link:hover .nav-icon { transform: scale(1.2); }
+.navbar-nav .nav-link.active .nav-icon { transform: scale(1.3); }
+
+/* ================= Navbar Toggler ================= */
+.navbar-toggler {
+  border: 1px solid #fff;
+  border-radius: 4px;
 }
 
-/* ✅ Active Link Highlight */
-.navbar-nav .nav-link.active {
-  color: #ffc107 !important;
-  font-weight: 600;
+@media (max-width: 991px) {
+  .navbar {
+    position: fixed;
+    top: var(--header-height, 70px);
+    left: 0;
+    width: 100%;
+    z-index: 1099;
+  }
+
+  .navbar-collapse {
+    background-color: #343a40;
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    z-index: 1080;
+  }
+
+  .page-content {
+    padding-top: calc(var(--header-height, 70px) + var(--navbar-height, 56px));
+  }
 }
-.navbar-nav .nav-link.active .nav-icon {
-  transform: scale(1.3);
-}
-/* 🌟 GLOBAL CARD STYLE FOR ALL COMPONENTS */

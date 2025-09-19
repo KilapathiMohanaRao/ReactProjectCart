@@ -21,7 +21,7 @@ body, html {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 55px;
 }
 
 /* ================= Top Header ================= */
@@ -303,4 +303,31 @@ body, html {
   .review-card {
     max-width: 95%;
   }
+}
+.home-wrapper { padding-top: 20px; }
+
+/* Hero Carousel */
+.hero-carousel { width: 100%; overflow: hidden; border-radius: 30px; position: relative; }
+.hero-carousel .carousel-inner { width: 100%; border-radius: 30px; }
+.hero-carousel .carousel-item img { width: 100%; height: 60vh; object-fit: cover; border-radius: 30px; }
+.hero-carousel .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.35); z-index: 1; border-radius: 30px; }
+.hero-carousel .carousel-caption { z-index: 2; }
+.hero-carousel .btn { border-radius: 50px; padding: 8px 20px; font-size: 1rem; font-weight: 600; }
+
+/* Category Cards */
+.card.h-100 { transition: transform 0.3s ease; border-radius: 20px; }
+.card.h-100:hover { transform: translateY(-5px); }
+.card img { border-radius: 20px; }
+
+/* Reviews */
+.review-card { background: #e9d3d3; max-width: 600px; width: 90%; border-radius: 20px; margin: 0 auto; }
+.review-text { font-style: italic; color: #555; }
+.reviewer-name { font-weight: 600; color: #333; }
+.review-rating { color: #fbbc04; font-size: 1.2rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-carousel .carousel-item img { height: 40vh; }
+  .card img { height: 150px; object-fit: cover; }
+  .review-card { max-width: 95%; }
 }

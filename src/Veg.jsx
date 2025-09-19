@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "./store"; // ✅ Ensure this import exists
+import { addItem } from "./store";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./veg.css";
@@ -47,6 +47,7 @@ function Veg() {
       else updated[item.id] = newQty;
       return updated;
     });
+
     if (delta > 0) dispatch(addItem(item));
   };
 
@@ -54,31 +55,25 @@ function Veg() {
 
   return (
     <>
+    <div className="veg-container">
       <ToastContainer position="top-right" autoClose={2000} />
 
       {/* Filter Section */}
-      <div className="mb-4 text-center">
-        <h5 className="mb-3">Filter by Price</h5>
-        <div className="filter-container">
-          {priceRanges.map(({ label }) => (
-            <label key={label} className="form-check-inline">
-              <input
-                type="checkbox"
-                checked={selectedFilter === label}
-                onChange={() => handleFilterChange(label)}
-              />
-              {label}
-            </label>
-          ))}
-          {selectedFilter && (
-            <button
-              className="btn btn-outline-danger btn-sm clear-btn"
-              onClick={() => setSelectedFilter("")}
-            >
-              Clear
-            </button>
-          )}
-        </div>
+      <div className="filter-section">
+        {priceRanges.map(({ label }) => (
+          <button
+            key={label}
+            className={`filter-btn ${selectedFilter === label ? "active" : ""}`}
+            onClick={() => handleFilterChange(label)}
+          >
+            {label}
+          </button>
+        ))}
+        {selectedFilter && (
+          <button className="clear-btn" onClick={() => setSelectedFilter("")}>
+            Clear
+          </button>
+        )}
       </div>
 
       {/* Product Grid */}
@@ -87,27 +82,29 @@ function Veg() {
           currentItems.map((item) => {
             const qty = quantities[item.id] || 0;
             return (
-              <div className="veg-card shadow-sm" key={item.id}>
-                <img src={item.image} alt={item.name} />
+              <div className="veg-card" key={item.id}>
+                <div className="card-image">
+                  <img src={item.image} alt={item.name} />
+                </div>
                 <div className="card-body">
                   <h5 className="veg-title">{item.name}</h5>
-                  <p className="veg-desc">{item.description}</p>
+                  <p className="veg-desc">{item.description || "Fresh and healthy"}</p>
                   <p className="veg-price">₹{item.price}</p>
 
                   {qty === 0 ? (
                     <button
-                      className="btn btn-success add-btn"
+                      className="add-btn"
                       onClick={() => {
                         updateQuantity(item, 1);
                         showToast("success", `Added ${item.name} to cart!`);
                       }}
                     >
-                      🛒 Add To Cart
+                      🛒 Add
                     </button>
                   ) : (
                     <div className="qty-control">
                       <button
-                        className="btn btn-outline-danger"
+                        className="dec"
                         onClick={() => {
                           updateQuantity(item, -1);
                           showToast("error", `Removed one ${item.name}`);
@@ -115,9 +112,9 @@ function Veg() {
                       >
                         −
                       </button>
-                      <span className="fw-bold">{qty}</span>
+                      <span>{qty}</span>
                       <button
-                        className="btn btn-outline-success"
+                        className="inc"
                         onClick={() => {
                           updateQuantity(item, 1);
                           showToast("info", `Added one more ${item.name}`);
@@ -132,36 +129,43 @@ function Veg() {
             );
           })
         ) : (
-          <p className="text-center text-muted w-100">No products found.</p>
+          <p className="no-products">No products found.</p>
         )}
       </div>
 
       {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="pagination-container">
-          <button
-            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          {Array.from({ length: totalPages }, (_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentPage(i + 1)}
-              className={currentPage === i + 1 ? "active" : ""}
-            >
-              {i + 1}
-            </button>
-          ))}
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
-      )}
+     {/* Pagination */}
+{totalPages > 1 && (
+  <div className="pagination-container">
+    <button
+      className="prev-btn"
+      onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+      disabled={currentPage === 1}
+    >
+      ◀
+    </button>
+
+    {Array.from({ length: totalPages }, (_, i) => (
+      <button
+        key={i}
+        onClick={() => setCurrentPage(i + 1)}
+        className={currentPage === i + 1 ? "active" : ""}
+      >
+        {i + 1}
+      </button>
+    ))}
+
+    <button
+      className="next-btn"
+      onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+      disabled={currentPage === totalPages}
+    >
+      ▶
+    </button>
+  </div>
+)}
+
+    </div>
     </>
   );
 }

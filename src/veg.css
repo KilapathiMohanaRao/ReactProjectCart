@@ -1,125 +1,322 @@
-/* ================= Grid ================= */
-.veg-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
+/* ================= Container ================= */
+.veg-container {
+  max-width: 1200px;
   margin: 0 auto;
-  max-width: 1100px;
-  padding: 0 10px;
+  padding: 20px 20px 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
 }
 
-/* ================= Card Styling ================= */
-.veg-card {
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  min-height: 340px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.veg-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.veg-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-
-.veg-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-}
-
-.veg-desc {
-  flex-grow: 1;
-  font-size: 0.85rem;
-  color: #555;
-  margin-bottom: 0.3rem;
-}
-
-.veg-price {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.add-btn {
-  margin-top: auto;
-  width: 100%;
-}
-
-/* ================= Quantity Control ================= */
-.qty-control {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-}
-
-/* ================= Filter ================= */
-.filter-container {
+/* ================= Filter Section ================= */
+.filter-section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+  margin-bottom: 25px;
+}
+
+.filter-btn,
+.clear-btn {
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-btn:hover {
+  background: #e9e9e9;
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  color: white;
+  border: none;
+  box-shadow: 0 6px 16px rgba(40,167,69,0.35);
 }
 
 .clear-btn {
-  margin-left: 8px;
+  background: #dc3545;
+  color: white;
+  border: none;
+}
+.clear-btn:hover {
+  background: #b02a37;
 }
 
+/* ================= Grid ================= */
+.veg-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  transition: all 0.3s ease;
+}
+
+
+/* ================= Card ================= */
+.veg-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.veg-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.15);
+}
+
+/* Card Image */
+.card-image img {
+  width: 100%;
+  height: 150px;   /* ⬅️ reduced from 200px */
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-top: 6px;
+  transition: transform 0.35s ease;
+}
+
+.veg-card:hover .card-image img {
+  transform: scale(1.07);
+}
+
+/* Card Body */
+.card-body {
+  padding: 10px 12px;  /* ⬅️ reduced padding */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+
+.veg-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.3;
+}
+
+.veg-desc {
+  font-size: 0.9rem;
+  color: #666;
+  min-height: 40px;
+  line-height: 1.4;
+}
+
+.veg-price {
+  font-weight: 700;
+  color: #28a745;
+  font-size: 1.15rem;
+  margin-top: 4px;
+}
+
+/* Add Button */
+.add-btn {
+  margin-top: auto;
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: 0 4px 12px rgba(40,167,69,0.35);
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, #1e7e34, #28a745);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(40,167,69,0.45);
+}
+
+
+/* Quantity Control */
+.qty-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  gap: 12px;
+}
+
+.qty-control button {
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;   /* square with soft corners */
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Increment (+) button → Green */
+.qty-control button.inc {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+}
+.qty-control button.inc:hover {
+  background: linear-gradient(135deg, #1e7e34, #28a745);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(40,167,69,0.45);
+}
+
+/* Decrement (−) button → Red */
+.qty-control button.dec {
+  background: linear-gradient(135deg, #dc3545, #a71d2a);
+}
+.qty-control button.dec:hover {
+  background: linear-gradient(135deg, #a71d2a, #dc3545);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(220,53,69,0.45);
+}
+
+.qty-control span {
+  font-weight: 700;
+  font-size: 1.1rem;
+  min-width: 30px;
+  text-align: center;
+}
+
+
+/* Pagination */
+/* ================= Pagination ================= */
 /* ================= Pagination ================= */
 .pagination-container {
   display: flex;
   justify-content: center;
-  gap: 5px;
-  margin: 15px 0;
+  align-items: center;
+  margin-top: 30px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .pagination-container button {
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  border-radius: 6px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 10px;
+  background: #f8f9fa;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.95rem;
   cursor: pointer;
-  background: #fff;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Hover effect */
+.pagination-container button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(40,167,69,0.25);
+}
+
+/* Active page */
 .pagination-container button.active {
-  background: #28a745;
+  background: linear-gradient(135deg, #28a745, #1e7e34);
   color: #fff;
   font-weight: 600;
+  box-shadow: 0 6px 14px rgba(40,167,69,0.35);
 }
 
+/* Disabled */
 .pagination-container button:disabled {
-  background: #eee;
+  background: #e9ecef;
+  color: #aaa;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
-/* ================= Responsive ================= */
+/* Special styles for Prev/Next buttons */
+.pagination-container .prev-btn,
+.pagination-container .next-btn {
+  font-size: 1.3rem;  /* bigger arrows */
+  font-weight: bold;
+  background: #f1f3f5;
+  color: #5b1bf1;  /* green arrows */
+}
+
+.pagination-container .prev-btn:hover,
+.pagination-container .next-btn:hover {
+  background: linear-gradient(135deg, #2d2af0, #5111e6);
+  color: #fff; /* turn white when hovered */
+}
+
+/* Mobile adjustments */
 @media (max-width: 576px) {
+  .pagination-container {
+    gap: 6px;
+  }
+  .pagination-container button {
+    min-width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+    padding: 0 8px;
+  }
+  .pagination-container .prev-btn,
+  .pagination-container .next-btn {
+    font-size: 1.1rem;
+  }
+}
+
+
+
+/* ================= Mobile Cute Cards ================= */
+@media (max-width: 576px) {
+  .veg-container {
+    padding: 80px 12px 20px; /* top padding for header */
+  }
+
   .veg-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    gap: 12px; /* spacing between cards */
   }
 
   .veg-card {
-    min-height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    background: #fff;
   }
 
-  .veg-card img {
-    height: 140px;
+  .card-image {
+    height: 120px; /* smaller cute image */
+    overflow: hidden;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* image stays contained */
+    display: block;
+    border-radius: inherit; /* match card rounding */
+  }
+
+  .card-body {
+    padding: 8px;
+    gap: 6px;
+    display: flex;
+    flex-direction: column;
   }
 
   .veg-title {
@@ -127,6 +324,31 @@
   }
 
   .veg-desc {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
+    min-height: 36px; /* uniform card height */
+    display: -webkit-box;/* limit description to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .veg-price {
+    font-size: 0.9rem;
+  }
+
+  .add-btn {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+
+  .qty-control {
+    gap: 6px;
+  }
+
+  .qty-control button {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
   }
 }
+

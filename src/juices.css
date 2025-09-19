@@ -1,129 +1,86 @@
-/* ================= Product Card ================= */
-.juice-card {
+/* Use exactly the same style as Non-Veg */
+.nonveg-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.filter-section {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.filter-btn,
+.clear-btn {
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-btn:hover { background: #e9e9e9; }
+.filter-btn.active { background: linear-gradient(135deg, #28a745, #1e7e34); color: #fff; border: none; }
+.clear-btn { background: #dc3545; color: white; border: none; }
+.clear-btn:hover { background: #b02a37; }
+
+.nonveg-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.nonveg-card {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  flex: 0 0 calc(25% - 15px); /* 4 cards per row including gap */
-  max-width: calc(25% - 15px);
-  min-width: 200px;
-}
-
-.juice-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-}
-
-.juice-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.card-body {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  padding: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.card-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-}
+.nonveg-card:hover { transform: translateY(-6px); box-shadow: 0 10px 22px rgba(0,0,0,0.15); }
 
-.card-text {
-  flex-grow: 1;
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 0.5rem;
+.nonveg-image img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  transition: transform 0.35s ease;
 }
+.nonveg-card:hover .nonveg-image img { transform: scale(1.07); }
 
-.fw-bold {
-  font-weight: bold;
-}
+.nonveg-body { padding: 10px 12px; display: flex; flex-direction: column; gap: 5px; }
+.nonveg-title { font-size: 1.2rem; font-weight: 700; color: #222; line-height: 1.3; }
+.nonveg-desc { font-size: 0.9rem; color: #666; min-height: 40px; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; }
+.nonveg-price { font-weight: 700; color: #28a745; font-size: 1.15rem; margin-top: 4px; }
 
-.btn {
-  border-radius: 6px;
-  font-size: 0.9rem;
-  padding: 6px 10px;
-}
+.add-btn { margin-top: auto; background: linear-gradient(135deg, #28a745, #1e7e34); color: white; border: none; border-radius: 10px; padding: 10px 14px; font-weight: 600; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 12px rgba(40,167,69,0.35); transition: all 0.35s ease; }
+.add-btn:hover { background: linear-gradient(135deg, #1e7e34, #28a745); transform: translateY(-2px); box-shadow: 0 8px 18px rgba(40,167,69,0.45); }
 
-.d-flex.align-items-center button {
-  width: 35%;
-  font-size: 1.1rem;
-}
+.qty-control { display: flex; justify-content: center; align-items: center; margin-top: auto; gap: 12px; }
+.qty-control button { border: none; width: 40px; height: 40px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; color: white; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.qty-control button.inc { background: linear-gradient(135deg, #28a745, #1e7e34); }
+.qty-control button.inc:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 6px 16px rgba(40,167,69,0.45); }
+.qty-control button.dec { background: linear-gradient(135deg, #dc3545, #a71d2a); }
+.qty-control button.dec:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 6px 16px rgba(220,53,69,0.45); }
+.qty-control span { font-weight: 700; font-size: 1.1rem; min-width: 30px; text-align: center; }
 
-/* ================= Pagination ================= */
-.pagination-container {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 20px;
-}
+/* Pagination */
+.pagination-container { display: flex; justify-content: center; align-items: center; margin-top: 30px; gap: 10px; flex-wrap: wrap; }
+.pagination-container button { min-width: 40px; height: 40px; padding: 0 12px; border: none; border-radius: 10px; background: #f8f9fa; color: #333; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.pagination-container button.active { background: linear-gradient(135deg, #28a745, #1e7e34); color: #fff; font-weight: 600; }
+.pagination-container button:disabled { background: #e9ecef; color: #aaa; cursor: not-allowed; }
 
-.pagination-container button {
-  border: 1px solid #ccc;
-  padding: 6px 12px;
-  background: white;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: 0.2s;
-}
-
-.pagination-container button:hover {
-  background-color: #f0f0f0;
-}
-
-.pagination-container .active {
-  background-color: #28a745;
-  color: white;
-  font-weight: bold;
-  border-color: #28a745;
-}
-
-.pagination-container button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* ================= Responsive ================= */
-.row.d-flex.flex-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-@media (max-width: 1200px) {
-  .juice-card {
-    flex: 0 0 calc(33.33% - 15px); /* 3 per row */
-    max-width: calc(33.33% - 15px);
-  }
-}
-
-@media (max-width: 992px) {
-  .juice-card {
-    flex: 0 0 calc(50% - 15px); /* 2 per row */
-    max-width: calc(50% - 15px);
-  }
-}
-
-@media (max-width: 768px) {
-  .juice-card {
-    flex: 0 0 90%; /* 1 per row */
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 576px) {
-  .juice-card {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-}
+/* Responsive */
+@media (max-width: 1024px) { .nonveg-grid-4 { grid-template-columns: repeat(2,1fr); gap: 16px; } .nonveg-image img { height: 140px; } }
+@media (max-width: 768px) { .nonveg-grid-4 { grid-template-columns: repeat(2,1fr); gap: 12px; } .nonveg-image img { height: 120px; } }
+@media (max-width: 576px) { .nonveg-grid-4 { grid-template-columns: 1fr; gap: 10px; } .nonveg-image img { height: 100px; } }

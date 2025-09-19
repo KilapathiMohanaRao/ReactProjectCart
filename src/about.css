@@ -16,7 +16,8 @@
 /* ============================= */
 .about-hero {
   position: relative;
-  height: 65vh;
+  height: 75vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

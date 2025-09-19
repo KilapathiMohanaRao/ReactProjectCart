@@ -1,67 +1,206 @@
-/* ✅ Strict 4-column grid */
+/* ================= Nonveg Container ================= */
+.nonveg-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+/* ================= Nonveg Grid ================= */
 .nonveg-grid-4 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Always 4 columns on large screens */
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  transition: all 0.3s ease;
 }
 
-/* ✅ Responsive Fix for Tablets & Mobiles */
-@media (max-width: 992px) {
-  .nonveg-grid-4 {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablet */
-  }
-}
-
-@media (max-width: 576px) {
-  .nonveg-grid-4 {
-    grid-template-columns: 1fr; /* 1 per row on mobile */
-  }
-}
-
-/* ✅ Card Styling */
+/* ================= Nonveg Card ================= */
 .nonveg-card {
-  display: flex;
-  flex-direction: column;
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  width: 100%;
-  min-height: 360px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* 🎨 Hover Effect */
 .nonveg-card:hover {
-  transform: translateY(-6px); /* Slight lift */
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
 }
 
-.nonveg-img {
+/* ================= FIX FOR IMAGE + BODY (Matches JSX) ================= */
+.nonveg-image {
   height: 150px;
+  overflow: hidden;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.nonveg-image img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.nonveg-card:hover .nonveg-image img {
+  transform: scale(1.07);
 }
 
 .nonveg-body {
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  padding: 12px;
+  gap: 5px;
 }
 
+/* ================= Card Text ================= */
 .nonveg-title {
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.3;
 }
 
 .nonveg-desc {
-  flex-grow: 1;
   font-size: 0.9rem;
-  color: #555;
+  color: #666;
+  min-height: 40px;
+  line-height: 1.4;
 }
 
 .nonveg-price {
-  margin: 0.5rem 0;
+  font-weight: 700;
+  color: #dc3545;
+  font-size: 1.15rem;
+  margin-top: 4px;
+}
+
+/* ================= Add Button ================= */
+.add-btn {
+  margin-top: auto;
+  background: linear-gradient(135deg, #dc3545, #a71d2a);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.35);
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, #a71d2a, #dc3545);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(220, 53, 69, 0.45);
+}
+
+/* ================= Quantity Control ================= */
+.qty-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  gap: 12px;
+}
+
+.qty-control button {
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Increment (+) button → Red */
+.qty-control button.inc {
+  background: linear-gradient(135deg, #dc3545, #a71d2a);
+}
+.qty-control button.inc:hover {
+  background: linear-gradient(135deg, #a71d2a, #dc3545);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.45);
+}
+
+/* Decrement (−) button → Darker Red */
+.qty-control button.dec {
+  background: linear-gradient(135deg, #a71d2a, #800000);
+}
+.qty-control button.dec:hover {
+  background: linear-gradient(135deg, #800000, #a71d2a);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(160, 30, 30, 0.45);
+}
+
+.qty-control span {
+  font-weight: 700;
+  font-size: 1.1rem;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* ================= Mobile View FIX ================= */
+@media (max-width: 576px) {
+  .nonveg-container {
+    padding: 80px 12px 20px;
+  }
+
+  /* ✅ FIX: use 2 columns instead of 4 */
+  .nonveg-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  /* ✅ Smaller cards */
+  .nonveg-image {
+    height: 120px;
+  }
+
+  .nonveg-body {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .nonveg-title {
+    font-size: 0.95rem;
+  }
+
+  .nonveg-desc {
+    font-size: 0.82rem;
+    min-height: 36px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .nonveg-price {
+    font-size: 0.9rem;
+  }
+
+  .add-btn {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+
+  .qty-control {
+    gap: 6px;
+  }
+
+  .qty-control button {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
 }

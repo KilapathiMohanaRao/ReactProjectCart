@@ -32,7 +32,7 @@ function Cart() {
   const [showPurchaseSuccess, setShowPurchaseSuccess] = useState(false);
   const [paymentmethod, setPaymentmethod] = useState("");
 
-  // ✅ Prefill email once
+  // ✅ Prefill email
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("loggedInUser"));
     if (saved?.email) setCustomerEmail(saved.email);
@@ -46,7 +46,10 @@ function Cart() {
   );
 
   const couponDiscountAmount = useMemo(
-    () => (couponResult.isValid ? (basePrice * couponResult.discountPercent) / 100 : 0),
+    () =>
+      couponResult.isValid
+        ? (basePrice * couponResult.discountPercent) / 100
+        : 0,
     [couponResult, basePrice]
   );
 
@@ -78,7 +81,7 @@ function Cart() {
     });
   }, [couponCode, basePrice]);
 
-  // ===== Memoized order list HTML (avoid regen every render) =====
+  // ===== Memoized order list HTML =====
   const orderListHTML = useMemo(
     () =>
       cartItems
@@ -176,17 +179,21 @@ function Cart() {
     setTimeout(() => setShowPurchaseSuccess(false), 3000);
   }, [cartItems, finalPrice, dispatch, navigate]);
 
-  // ===== Quantity Handler =====
+  // ===== Quantity Handler (✅ Fixed) =====
   const handleQtyChange = (item, action) => {
     if (action === "inc") {
       dispatch(increaseQty(item.name));
       toast.info(`${item.name} quantity increased`);
-    } else if (item.quantity > 1) {
-      dispatch(decreaseQty(item.name));
-      toast.error(`${item.name} quantity decreased`);
-    } else {
+    } else if (action === "dec") {
+      if (item.quantity > 1) {
+        dispatch(decreaseQty(item.name));
+        toast.error(`${item.name} quantity decreased`);
+      } else {
+        toast.warn(`${item.name} is already at minimum. Use Remove button.`);
+      }
+    } else if (action === "remove") {
       dispatch(removeFromCart(item.name));
-      toast.error(`${item.name} removed`);
+      toast.error(`${item.name} removed directly`);
     }
   };
 

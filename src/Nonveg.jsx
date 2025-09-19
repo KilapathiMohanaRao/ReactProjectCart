@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "./store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./nonveg.css";
+import "./veg.css"; // ✅ Use same CSS as Veg
 
 function Nonveg() {
   const nonVegitems = useSelector((state) => state.products.Nonveg);
@@ -52,91 +52,74 @@ function Nonveg() {
       : nonVegitems;
 
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-  const endIndex = currentPage * itemsPerPage;
-  const startIndex = endIndex - itemsPerPage;
-  const currentItems = filteredItems.slice(startIndex, endIndex);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentItems = filteredItems.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <>
       <ToastContainer position="top-right" autoClose={2000} />
 
-      {/* Filter Section */}
-      <div className="mb-4 text-center">
-        <h5 className="mb-3">Filter by Price</h5>
-        <div className="d-flex flex-wrap justify-content-center gap-3">
+      <div className="veg-container">
+        {/* Filter Section */}
+        <div className="filter-section">
           {priceRanges.map((range) => (
-            <div key={range.label} className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id={range.label}
-                checked={selectedFilter === range.label}
-                onChange={() => handleFilterChange(range.label)}
-              />
-              <label className="form-check-label" htmlFor={range.label}>
-                {range.label}
-              </label>
-            </div>
+            <button
+              key={range.label}
+              className={`filter-btn ${selectedFilter === range.label ? "active" : ""}`}
+              onClick={() => handleFilterChange(range.label)}
+            >
+              {range.label}
+            </button>
           ))}
           {selectedFilter && (
-            <button
-              className="btn btn-outline-danger btn-sm ms-3"
-              onClick={() => setSelectedFilter("")}
-            >
+            <button className="clear-btn" onClick={() => setSelectedFilter("")}>
               Clear Filter
             </button>
           )}
         </div>
-      </div>
 
-      {/* Products Grid - Strict 4 Columns */}
-      <div className="container">
-        <div className="nonveg-grid-4">
+        {/* Products Grid */}
+        <div className="veg-grid">
           {currentItems.length > 0 ? (
             currentItems.map((item) => {
               const qty = quantities[item.id] || 0;
               return (
-                <div className="nonveg-card shadow-sm" key={item.id}>
-                  <img src={item.image} className="nonveg-img" alt={item.name} />
-                  <div className="nonveg-body">
-                    <h5 className="nonveg-title">{item.name}</h5>
-                    <p className="nonveg-desc">{item.description}</p>
-                    <p className="nonveg-price fw-bold">Price: ₹{item.price}</p>
+                <div className="veg-card" key={item.id}>
+                  <div className="card-image">
+                    <img src={item.image} alt={item.name} />
+                  </div>
+                  <div className="card-body">
+                    <h5 className="veg-title">{item.name}</h5>
+                    <p className="veg-desc">{item.description}</p>
+                    <p className="veg-price">₹{item.price}</p>
 
                     {qty === 0 ? (
                       <button
-                        type="button"
-                        className="btn btn-success mt-auto w-100"
+                        className="add-btn"
                         onClick={() => {
                           handleAdd(item);
-                          toast.success(
-                            `Product ${item.name} added to cart successfully!`
-                          );
+                          toast.success(`${item.name} added to cart!`);
                         }}
                       >
                         🛒 Add To Cart
                       </button>
                     ) : (
-                      <div className="d-flex justify-content-between align-items-center mt-auto">
+                      <div className="qty-control">
                         <button
-                          className="btn btn-outline-danger"
+                          className="dec"
                           onClick={() => {
                             handleRemove(item);
-                            toast.error(
-                              `Product ${item.name} decreasing quantity`
-                            );
+                            toast.warning(`${item.name} quantity decreased`);
                           }}
                         >
                           −
                         </button>
-                        <span className="fw-bold">{qty}</span>
+                        <span>{qty}</span>
                         <button
-                          className="btn btn-outline-success"
+                          className="inc"
                           onClick={() => {
                             handleAdd(item);
-                            toast.info(
-                              `Product ${item.name} increasing quantity`
-                            );
+                            toast.info(`${item.name} quantity increased`);
                           }}
                         >
                           +
@@ -148,7 +131,7 @@ function Nonveg() {
               );
             })
           ) : (
-            <p className="text-center text-muted w-100">No products found.</p>
+            <p className="text-center w-100">No products found.</p>
           )}
         </div>
 
@@ -156,31 +139,29 @@ function Nonveg() {
         {totalPages > 1 && (
           <div className="pagination-container">
             <button
-              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              className="prev-btn"
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="nav-btn"
             >
-              Previous
+              ◀
             </button>
 
             {Array.from({ length: totalPages }, (_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrentPage(i + 1)}
-                className={`page-btn ${currentPage === i + 1 ? "active" : ""}`}
+                className={currentPage === i + 1 ? "active" : ""}
               >
                 {i + 1}
               </button>
             ))}
 
             <button
-              onClick={() =>
-                setCurrentPage(Math.min(totalPages, currentPage + 1))
-              }
+              className="next-btn"
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="nav-btn"
             >
-              Next
+              ▶
             </button>
           </div>
         )}
