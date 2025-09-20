@@ -5,7 +5,7 @@
   text-align: center;
   margin-bottom: 2rem;
   color: #ff6b6b;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* ===== CONTAINER ===== */
@@ -15,6 +15,9 @@
   gap: 2rem;
   padding: 20px;
   align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box; /* ✅ Ensures proper width on mobile */
 }
 
 /* ===== ORDER CARD ===== */
@@ -22,12 +25,13 @@
   background: #fff;
   border-radius: 14px;
   padding: 20px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
   max-width: 700px;
+  box-sizing: border-box;
 }
 
 /* ===== ORDER HEADER ===== */
@@ -53,12 +57,14 @@
   gap: 1rem;
   justify-content: center;
   margin-bottom: 3.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* ===== ITEM BLOCK ===== */
 .order-item-block {
-  flex: 1 1 200px; /* 🔧 Allow flexible shrinking */
-  max-width: 220px; /* prevents growing too large */
+  flex: 1 1 200px; /* 🔧 Flexible but respects min size */
+  max-width: 220px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -126,16 +132,16 @@
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .order-items-wrapper {
-    flex-direction: column; /* 🔧 stack items vertically */
+    flex-direction: column; /* ✅ Stack items vertically */
     align-items: center;
   }
   .order-item-block {
     flex: 1 1 100%;
-    width: 100%; /* 🔧 take full width on mobile */
+    width: 100%;
     max-width: 100%;
   }
   .order-total {
-    position: static; /* 🔧 avoid overlap */
+    position: static;
     margin-top: 1rem;
     transform: none;
     justify-content: center;

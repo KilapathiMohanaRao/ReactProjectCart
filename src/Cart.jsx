@@ -172,6 +172,11 @@ function Cart() {
       icon: "success",
       title: "✅ Order Placed Successfully",
       text: "You can view this order in your Orders page.",
+      confirmButtonText: " Ok ",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/Order"); // ✅ Direct navigation after OK click
+      }
     });
 
     confetti();
@@ -179,7 +184,7 @@ function Cart() {
     setTimeout(() => setShowPurchaseSuccess(false), 3000);
   }, [cartItems, finalPrice, dispatch, navigate]);
 
-  // ===== Quantity Handler (✅ Fixed) =====
+  // ===== Quantity Handler =====
   const handleQtyChange = (item, action) => {
     if (action === "inc") {
       dispatch(increaseQty(item.name));
@@ -403,7 +408,6 @@ function Cart() {
                 <span>✔</span>
               </div>
               <h3>Purchase Successful 🎉</h3>
-              <p>Total: ₹{finalPrice.toFixed(2)}</p>
             </div>
           </div>
         )}
